@@ -415,11 +415,16 @@
 						<li>We present a <span class="highlight">biscriptual morphological transducer</span> for Crimean Tatar</li>
 						<ul>
 							<li>A <span class="highlight">rule-based machine translation</span> (RBMT) system:<br/>
-								<ex>köyünde</ex> → 
+								<center>
+								<ex>Yahşı bala balaban bir terekte yuqladı.</ex><lg>crh</lg><br/>→
+								Iyi çocuk büyük bir ağaçta uyudu.<lg>tur</lg>
+								</center>
 							</li>
 							<li>This system supports both orthographies, Cyrillic and Latin:<br/>
-								<ex>köyünde</ex> → <br />
-								<ex>коюнде</ex> → </span>
+								<center>
+								<ex>Яхшы бала балабан бир теректе юкълады.</ex><lg>crh</lg><br/>→
+								Iyi çocuk büyük bir ağaçta uyudu.<lg>tur</lg>
+								</center>
 							</li>
 							<li>Free / Open Source, <a href="https://github.com/apertium/apertium-crh">https://github.com/apertium/apertium-crh-tur</a></li>
 						</ul>
@@ -488,6 +493,27 @@
 				</section>
 
 				<section>
+					<h2>Background: Why FOSS RBMT?</h2>
+					<ul>
+						<li>FOSS (Free/Open-Source Software):</li>
+						<ul>
+							<li>Available for anyone to use or modify</li>
+							<li>Support from developers</li>
+							<li>Robust community (Apertium)</li>
+							<li>I.e., in principle <span class="highlight">accessible to community</span></li>
+						</ul>
+						<li>RBMT (Rule-based machine translation)</li>
+						<ul>
+							<li>No need for large parallel corpora</li>
+							<li>Easy to fix identifiable problems, expand coverage</li>
+							<li>I.e., in principle <span class="highlight">community-maintainable</span></li>
+						</ul>
+					</ul>
+					<p>All of which is crucial for low-resource languages / translation pairs.</p>
+					<!-- Step one in SMT/NMT for crh-tur: translate a whole bunch of text! -->
+				</section>
+
+				<section>
 					<h2>Background: Prior work</h2>
 					<ul>
 						<li>Other FOSS Turkic transducers with good (≥90%) coverage:</li>
@@ -503,7 +529,6 @@
 						</ul>
 					</ul>
 				</section>
-
 
 				<section>
 					<h2>Future work</h2>
