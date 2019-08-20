@@ -216,7 +216,8 @@
 
 			/* gloss */
 			gl {
-				color: silver ;
+				/* color: silver ; */
+				color: white ;
 				-webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */
 				filter: brightness(80%);
 				font-style: italic ;
@@ -539,7 +540,30 @@
 
 				<section>
 					<h2>System architecture</h2>
-					<img src="img/architecture.svg"/>
+					<ul>
+						<li>Standard Apertium RBMT pipeline</li>
+					</ul>
+					<img style="width: 100% !important;" class="noframe" src="img/architecture.svg"/>
+				</section>
+				<section>
+					<h2>System architecture: example</h2>
+					<ul>
+						<li>input: <ex>yahşı vaqıt edi</ex></li>
+						<li>morphological analysis: <div class="codeblock">^yahşı/yahşı<tag>adj</tag>/yahşı<tag>adj</tag><tag>subst</tag><tag>nom</tag>/yahşı<tag>adj</tag>+e<tag>cop</tag><tag>aor</tag><tag>p3</tag><tag>sg</tag>/yahşı<tag>adj</tag><tag>subst</tag><tag>nom</tag>+e<tag>cop</tag><tag>aor</tag><tag>p3</tag><tag>sg</tag>$ ^vaqıt/vaqıt<tag>n</tag><tag>nom</tag>/vaqıt<tag>n</tag><tag>attr</tag>/vaqıt<tag>n</tag><tag>nom</tag>+e<tag>cop</tag><tag>aor</tag><tag>p3</tag><tag>sg</tag>$ ^edi/e<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>/e<tag>vaux</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>$^./.<tag>sent</tag>$</div></li>
+						<li>disambiguation: <div class="codeblock">
+						^yahşı/yahşı<tag>adj</tag>$ ^vaqıt/vaqıt<tag>n</tag><tag>nom</tag>$ ^edi/e<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>$^./.<tag>sent</tag>$
+						</div></li>
+						<li>lexical transfer: <div class="codeblock">
+						^yahşı<tag>adj</tag>/iyi<tag>adj</tag>$ ^vaqıt<tag>n</tag><tag>nom</tag>/vakit<tag>n</tag><tag>nom</tag>/süre<tag>n</tag><tag>nom</tag>$ ^e<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>/i<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>$^.<tag>sent</tag>/.<tag>sent</tag>$
+						</div></li>
+						<li>lexical selection:</li> <div class="codeblock">
+						^yahşı<tag>adj</tag>/iyi<tag>adj</tag>$ ^vaqıt<tag>n</tag><tag>nom</tag>/vakit<tag>n</tag><tag>nom</tag>$ ^e<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>/i<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>$^.<tag>sent</tag>/.<tag>sent</tag>$
+						</div></li>
+						<li>structural transfer: <div class="codeblock">
+						^iyi<tag>adj</tag>$ ^vakit<tag>n</tag><tag>nom</tag>+i<tag>cop</tag><tag>ifi</tag><tag>p3</tag><tag>sg</tag>$
+						</div></li>
+						<li>morphological generation: <ex>iyi vakitti</ex></li>
+					</ul>
 				</section>
 
 				<section>
@@ -548,32 +572,126 @@
 						<li><ex><u>vaqıt</u></ex><lg>crh</lg> → <ex><u>vakit</u></ex><lg>tur</lg> <gl>time</gl></li>
 						<li><ex>bir <u>vaqıt</u></ex><lg>crh</lg> → <ex>bir <u>süre</u></ex><lg>tur</lg> <gl>(for) some time</gl></li>
 					</ul>
+					<p>Lexical transfer:</p>
 					<center>
 					<div class="codeblock" style="width: 88%; float: auto;">
 &lt;e&gt;&lt;p&gt;&lt;l&gt;vaqıt&lt;s n="n"/&gt;&lt;/l&gt;&lt;r&gt;vakit&lt;s n="n"/&gt;&lt;/r&gt;&lt;/p&gt;&lt;/e&gt;<br />
 &lt;e&gt;&lt;p&gt;&lt;l&gt;vaqıt&lt;s n="n"/&gt;&lt;/l&gt;&lt;r&gt;süre&lt;s n="n"/&gt;&lt;/r&gt;&lt;/p&gt;&lt;/e&gt;
 					</div>
-					<div class="codeblock" style="width: 56%; float: auto;">
-&lt;rule weight="1.0"&gt;<br/>
+					<p>Lexical selection:</p>
+					<div class="codeblock" style="width: 60%; float: auto;">
+&lt;rule weight="1.2"&gt;<br/>
 &nbsp;&nbsp;&lt;match lemma="bir"/&gt;<br/>
 &nbsp;&nbsp;&lt;match lemma="vaqıt" tags="n.*"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;select lemma="süre" tags="n.*"/&gt;<br/>
 &nbsp;&nbsp;&lt;/match&gt;<br/>
+&lt;/rule&gt;<br/>
+<br/>
+&lt;rule weight="1.0"&gt;<br/>
+&nbsp;&nbsp;&lt;match lemma="vaqıt" tags="n.*"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;select lemma="vakit" tags="n.*"/&gt;<br/>
+&nbsp;&nbsp;&lt;/match&gt;<br/>
 &lt;/rule&gt;
   					</div>
 					</center>
+					<p>Currently 13 lexical selection rules.</p>
+				</section>
+
+				<section>
+					<h2>Example: structural transfer</h2>
+					<ul style="margin-bottom: 1em;">
+						<li><ex>barğan soñ</ex><lg>crh</lg> → <ex>gittikten sonra</ex><lg>tur</lg> <gl>after going</gl></li>
+						<li><span class="code" style="font-size: 80% !important">^bar&lt;v&gt;&lt;iv&gt;&lt;gpr_past&gt;$ ^soñ&lt;post&gt;$</span><lg>crh</lg> →<br/><span class="code" style="font-size: 80% !important">^git&lt;v&gt;&lt;iv&gt;&lt;gpr_past&gt;<span class="highlight-cyan"/>&lt;subst&gt;&lt;abl&gt;</span>$ ^sonra&lt;post&gt;$</span><lg>tur</lg></li>
+					</ul>
+<center>
+<div class="codeblock" style="width: 88%; float: auto;">
+&lt;rule comment="REGLA: GAn soñ "&gt;<br/>
+&nbsp;&lt;pattern&gt;<br/>
+&nbsp;&nbsp;&lt;pattern-item n="gpr_past"/&gt;<br/>
+&nbsp;&nbsp;&lt;pattern-item n="soñ"/&gt;<br/>
+&nbsp;&lt;/pattern&gt;<br/>
+&nbsp;&lt;action&gt;<br/>
+&nbsp;&nbsp;&lt;call-macro n="f_strip_tags"&gt;&lt;with-param pos="1"/&gt;&lt;/call-macro&gt;<br/>
+&nbsp;&nbsp;&lt;let&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;<br/>
+<span class="highlight-cyan">&nbsp;&nbsp;&nbsp;&lt;concat&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;&lt;lit-tag v="subst.abl"/&gt;&lt;/concat&gt;</span><br/>
+&nbsp;&nbsp;&lt;/let&gt;<br/>
+&nbsp;&nbsp;&lt;out&gt;&lt;chunk name="n" case="caseSecondWord"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;tags&gt;&lt;tag&gt;&lt;lit-tag v="SP"/&gt;&lt;/tag&gt;&lt;/tags&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;lu&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;&lt;/lu&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;b/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;lu&gt;&lt;clip pos="2" side="tl" part="whole"/&gt;&lt;/lu&gt;<br/>
+&nbsp;&nbsp;&lt;/chunk&gt;&lt;/out&gt;<br/>
+&nbsp;&lt;/action&gt;<br/>
+</rule>
+</div></center>
+					<p>Currently 53 rules for <tt>crh-tur</tt> (and 9 for <tt>tur-cur</tt>)</p>
+				</section>
+
+				<section>
+					<h2>Evaluation</h2>
+					<ul>
+						<li>Compared <span class="highlight-cyan">our RBMT system</span> to <span class="highlight-green">an NMT system</span> to <span class="highlight-red">no MT</span></li>
+						<li>Trained an OpenNMT <em>NMT-Small</em> model <span style="font-size: 70% !important;">(word-level, Byte-pair Encoding)</span></li>
+						<li>Assembled parallel corpora, aligned &amp; tokenised <!-- sentences --><span style="font-size: 70% !important;">(hunalign, Moses tokeniser)</span></li>
+						<li>All corpora (except Folk Tales) split into 90%-5%-5% train-test-dev</li>
+						<li>Measured BLEU <span style="font-size: 70% !important;">(higher = better)</span> &amp; Word Error Rate <span style="font-size: 70% !important;">(lower = better)</span></li>
+					</ul>
+					<div style="margin-top: 0.5em;">
+					<table class="nolines" style="font-size: 80% !important; float: left;">
+						<tr><th>Corpus</th><th><tt>crh</tt><br/>tokens</th><th><tt>tur</tt><br/>tokens</th></tr>
+						<tr>
+						    <tr><td>Yıldız (Volume I)</td><td class="raln">192,671</td><td class="raln">190,769</td></tr>
+    <tr><td>Yıldız (Volume II)</td><td class="raln">161,047 </td><td class="raln">160,420</td></tr>
+    <tr><td>Ayder Osman</td><td class="raln">22,190</td><td class="raln"> 21,950</td></tr>
+    <tr><td>Poverty Literature</td><td class="raln">23,701</td><td class="raln">24,185</td></tr>
+    <tr><td>Folk Tales</td><td class="raln">84,499</td><td class="raln">78,998</td></tr>
+					</table>
+
+					<table class="nolines" style="font-size: 80% !important; float: right;">
+						<tr><th>Corpus</th><th>System</th><th>BLEU</th><th>WER</th></tr>
+						<tr><td>Test Corpus</td><td class="highlight-cyan">RBMT</td><td class="raln highlight-cyan">20.50</td><td class="raln highlight-cyan">54.83% </td></tr>
+						<tr><td>Test Corpus</td><td class="highlight-green">NMT</td><td class="raln highlight-green">7.88</td><td class="raln highlight-green">76.25% </td></tr>
+						<tr><td>Test Corpus</td><td class="highlight-red">None</td><td class="raln highlight-red">8.29</td><td class="raln highlight-red">69.49%  </td></tr>
+						<tr style="border-top: 1pt solid white !important"><td>Folk Tales </td><td class="highlight-cyan">RBMT </td><td class="raln highlight-cyan">22.07</td><td class="raln highlight-cyan">52.63% </td></tr>
+						<tr><td>Folk Tales  </td><td class="highlight-green">NMT </td><td class="raln highlight-green">2.27</td><td class="raln highlight-green">85.11% </td></tr>
+						<tr><td>Folk Tales  </td><td class="highlight-red">None </td><td class="raln highlight-red">9.04</td><td class="raln highlight-red">67.87% </td></tr>
+					</table>
+					</div>
+
+					<ul style="margin-top: 1em">
+						<li>Main finding: <tt>crh-tur</tt> <span class="highlight-cyan">RBMT</span> &gt; <span class="highlight-green">no MT</span> &gt; <span class="highlight-red">NMT</span></li>
+						<li>Orthographic and dialectal variety of texts a hinderance to NMT?</li>
+						<li>RBMT robust to this issue: adding frequent lexical variants trivial</li>
+						<li><span class="highlight">RBMT errors</span>: gaps in morphophonology, disambiguation, lexicon</li>
+						<li><span class="highlight">NMT errors</span>: lack of data...</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>Conclusion</h2>
+					<ul>
+						<li>First ever publicly available MT system between Crimean Tatar and Turkish</li>
+						<li>Near production-level coverage, prototype-level transfer</li>
+						<li>High-quality RBMT between closely-related morphologically-rich agglutinative languages is possible</li>
 				</section>
 
 				<section>
 					<h2>Future work</h2>
 					<ul>
 						<li>Translation the other way around! (<tt>tur-crh</tt>)<br/>Crimean Tatar speakers would gain access to much more material</li>
-						<li>Expand all parts: coverage (monolingual dictionaries), disambiguation, bilingual dictionary, lexical selection, structural transfer</li>
-						<li>Add new modules:</li>
+						<li>Expand all parts:</li>
 						<ul>
-							<li>anaphor resolution: might not help with very much?</li>
-							<li>recursive structural transfer: languages are very similar, so limited usefulness</li>
-							<li>discontiguous multiwords: a handful of cases where this would be useful</li>
+							<li>coverage (monolingual and bilingual dictionaries):<br />+ ~5000 words for 95% coverage</li>
+							<li>disambiguation</li>
+							<li>lexical selection</li>
+							<li>structural transfer</li>
+						</ul>
+						<li>Add newly available modules to pipeline:</li>
+						<ul>
+							<li>anaphor resolution <span style="font-size: 70% !important;">(might not help with very much?)</span></li>
+							<li>recursive structural transfer <span style="font-size: 70% !important;">(languages are very similar, so limited usefulness)</span></li>
+							<li>discontiguous multiwords <span style="font-size: 70% !important;">(a handful of cases where this would be useful)</span></li>
 						</ul>
 					</ul>
 				</section>
