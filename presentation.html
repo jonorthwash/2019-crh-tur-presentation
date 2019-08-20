@@ -412,25 +412,25 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-						<li>We present a <span class="highlight">biscriptual morphological transducer</span> for Crimean Tatar</li>
+						<li>We present a <span class="highlight">machine translation system</span> that translates from Crimean Tatar to Turkish (<tt>crh-tur</tt>)</li>
 						<ul>
-							<li>A <span class="highlight">rule-based machine translation</span> (RBMT) system:<br/>
+							<li><span class="highlight">Rule-based machine translation</span> (RBMT) system:<br/>
 								<center>
 								<ex>Yahşı bala balaban bir terekte yuqladı.</ex><lg>crh</lg><br/>→
 								Iyi çocuk büyük bir ağaçta uyudu.<lg>tur</lg>
 								</center>
 							</li>
-							<li>This system supports both orthographies, Cyrillic and Latin:<br/>
+							<li>Supports <tt>crh</tt>'s <span class="highlight">two normative orthographies</span>, Cyrillic and Latin:<br/>
 								<center>
 								<ex>Яхшы бала балабан бир теректе юкълады.</ex><lg>crh</lg><br/>→
 								Iyi çocuk büyük bir ağaçta uyudu.<lg>tur</lg>
 								</center>
 							</li>
-							<li>Free / Open Source, <a href="https://github.com/apertium/apertium-crh">https://github.com/apertium/apertium-crh-tur</a></li>
+							<li><span class="highlight">Free / Open Source</span> (FOSS): <a href="https://github.com/apertium/apertium-crh">https://github.com/apertium/apertium-crh-tur</a></li>
 						</ul>
 						<li>Roadmap:</li>
 						<ul>
-							<li>Context and Background</li>
+							<li>Context, Background, Motivation</li>
 							<li>Methodology and Issues</li>
 							<li>Evaluation and Results</li>
 							<li>Concluding remarks</li>
@@ -484,7 +484,7 @@
 							<li>Oghuz / SW Turkic:</li>
 							<ul>
 								<li><span class="code">gag</span> - Gagauz</li>
-								<li><span class="code">tur</span> - Turkish</li>
+								<li><span class="code"><b class="highlight-cyan">tur</b></span> - <b class="highlight-cyan">Turkish</b></li>
 								<li><span class="code">azj</span> - Northern Azeri</li>
 								<li><span class="code">azb</span> - Southern Azeri</li>
 							</ul>
@@ -493,45 +493,89 @@
 				</section>
 
 				<section>
-					<h2>Background: Why FOSS RBMT?</h2>
+					<h2>Motivation: Why <tt>crh-tur</tt>, FOSS, RBMT?</h2>
 					<ul>
+						<li>Crimean-Tatar to Turkish</li>
+						<ul>
+							<li>Widespread interest in Crimean Tatar (and other Turkic languages) among Turkish speakers (not just academics)</li>
+							<li>Crimean Tatar can be difficult to read for Turkish speakers due to morphological and lexical differences</li>
+							<li>I.e., <!-- in principle --><span class="highlight">useful to community</span></li>
+						</ul>
 						<li>FOSS (Free/Open-Source Software):</li>
 						<ul>
 							<li>Available for anyone to use or modify</li>
 							<li>Support from developers</li>
 							<li>Robust community (Apertium)</li>
-							<li>I.e., in principle <span class="highlight">accessible to community</span></li>
+							<li>I.e., <!-- in principle --><span class="highlight">accessible to community</span></li>
 						</ul>
 						<li>RBMT (Rule-based machine translation)</li>
 						<ul>
 							<li>No need for large parallel corpora</li>
+							<li>Lots of lexical "free rides" between closely related languages</li>
+							<li>Not much structural transfer needed btw closely related lgs</li>
+
 							<li>Easy to fix identifiable problems, expand coverage</li>
-							<li>I.e., in principle <span class="highlight">community-maintainable</span></li>
+							<li>I.e., <!-- in principle --><span class="highlight">community-maintainable</span></li>
 						</ul>
 					</ul>
-					<p>All of which is crucial for low-resource languages / translation pairs.</p>
+					<!-- p>All of which is crucial for low-resource languages / translation pairs.</p -->
 					<!-- Step one in SMT/NMT for crh-tur: translate a whole bunch of text! -->
 				</section>
 
 				<section>
 					<h2>Background: Prior work</h2>
 					<ul>
-						<li>FOSS Turkic transducers with good (≥90%) coverage:</li>
+						<li>Existing FOSS Turkic language technology:</li>
 						<ul>
-							<li><span class="highlight">Kypchak</span>: <span class="highlight">Crimean Tatar</span>, Kyrgyz, Kazakh, Tatar, Kumyk</li>
-							<li><span class="highlight">Also</span>: <span class="highlight">Turkish</span>, Tuvan, Sakha</li>
+							<li><span class="highlight-cyan">morphological transducers</span> with good (≥90%) coverage: <span class="highlight">Crimean Tatar</span>, Kyrgyz, Kazakh, Tatar, Kumyk, <span class="highlight">Turkish</span>, Tuvan, Sakha</li>
+							<li><span class="highlight-cyan">MT systems</span>: Kazakh-Tatar (published), Kazakh-Turkish (published), Turkish-Kyrgyz, Azeri-Turkish, Tatar-Bashqort, Kazakh-Karakalpak, Kazakh-Kyrgyz, Uzbek-Karakalpak, Uyghur-Turkish, ...</li>
 						</ul>
-						<li>Altıntaş and Çiçekli closed source transducer</li>
+						<li>Other reported MT systems (not available to public)</li>
 						<ul>
-							<li><span class="highlight">Lexicon</span> was eventually obtained as open source</li>
-							<li>Several thousand new stems</li>
-							<li>We've been incorporating (categorising) them gradually</li>
+							<li><span class="highlight">Turkish-Crimean Tatar</span>, Turkish-Azerbaijani, Turkish-Tatar, Turkish-Turkmen</li>
 						</ul>
 					</ul>
 				</section>
 
 				<section>
+					<h2>System architecture</h2>
+					<img src="img/architecture.svg"/>
+				</section>
+
+				<section>
+					<h2>Example: lexical selection</h2>
+					<ul>
+						<li><ex><u>vaqıt</u></ex><lg>crh</lg> → <ex><u>vakit</u></ex><lg>tur</lg> <gl>time</gl></li>
+						<li><ex>bir <u>vaqıt</u></ex><lg>crh</lg> → <ex>bir <u>süre</u></ex><lg>tur</lg> <gl>(for) some time</gl></li>
+					</ul>
+					<center>
+					<div class="codeblock" style="width: 88%; float: auto;">
+&lt;e&gt;&lt;p&gt;&lt;l&gt;vaqıt&lt;s n="n"/&gt;&lt;/l&gt;&lt;r&gt;vakit&lt;s n="n"/&gt;&lt;/r&gt;&lt;/p&gt;&lt;/e&gt;<br />
+&lt;e&gt;&lt;p&gt;&lt;l&gt;vaqıt&lt;s n="n"/&gt;&lt;/l&gt;&lt;r&gt;süre&lt;s n="n"/&gt;&lt;/r&gt;&lt;/p&gt;&lt;/e&gt;
+					</div>
+					<div class="codeblock" style="width: 56%; float: auto;">
+&lt;rule weight="1.0"&gt;<br/>
+&nbsp;&nbsp;&lt;match lemma="bir"/&gt;<br/>
+&nbsp;&nbsp;&lt;match lemma="vaqıt" tags="n.*"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;select lemma="süre" tags="n.*"/&gt;<br/>
+&nbsp;&nbsp;&lt;/match&gt;<br/>
+&lt;/rule&gt;
+  					</div>
+					</center>
+				</section>
+
+				<section>
 					<h2>Future work</h2>
+					<ul>
+						<li>Translation the other way around! (<tt>tur-crh</tt>)<br/>Crimean Tatar speakers would gain access to much more material</li>
+						<li>Expand all parts: coverage (monolingual dictionaries), disambiguation, bilingual dictionary, lexical selection, structural transfer</li>
+						<li>Add new modules:</li>
+						<ul>
+							<li>anaphor resolution: might not help with very much?</li>
+							<li>recursive structural transfer: languages are very similar, so limited usefulness</li>
+							<li>discontiguous multiwords: a handful of cases where this would be useful</li>
+						</ul>
+					</ul>
 				</section>
 
 				<section>
