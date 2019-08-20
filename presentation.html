@@ -567,7 +567,36 @@
 				</section>
 
 				<section>
-					<h2>Example: lexical selection</h2>
+					<h2>Morphological analysis and disambiguation</h2>
+					<ul>
+						<li>Morphological analysis: HFST</li>
+						<ul>
+							<li><tt>lexc</tt> for morphotactics</li>
+							<li><tt>twol</tt> for morphophonology</li>
+							<li>Crimean Tatar: 13,054 stems (~6K Nouns, ~1K Verbs)</li>
+							<li>Turkish: 17,221 stems (~8.5K Nouns, ~2K Verbs)</li>
+						</ul>
+
+						<p><span style="font-size: 60% !important;">Tyers, Francis M., Jonathan Washington , Darya Kavitskaya, Memduh Gökırmak, Nick Howell, and Remziye Berberova (2019). “A biscriptual morphological transducer for Crimean Tatar”. In: <em>Proceedings of the Third Workshop on Computational Methods for Endangered Languages (ComputEL-3).</em></span></p>
+						<li>Disambiguation: <tt>vislcg3</tt></li>
+						<ul>
+							<li>Crimean Tatar</li>
+							<ul>
+								<li>analyser outputs: ~2.13 analyses per form</li>
+								<li>disambiguator reduces to ~1.18 analyses per form</li>
+							</ul>
+							<li>Turkish</li>
+							<ul>
+								<li>analyser outputs: ~2.90 analyses per form</li>
+								<li>disambiguator reduces to ~1.46 analyses per form</li>
+							</ul>
+							<li>Form selected from remaining ~randomly</li>
+							<li>Incorrectly chosen form often transfers correctly</li>
+						</ul>
+				</section>
+
+				<section>
+					<h2>Lexical selection: example</h2>
 					<ul>
 						<li><ex><u>vaqıt</u></ex><lg>crh</lg> → <ex><u>vakit</u></ex><lg>tur</lg> <gl>time</gl></li>
 						<li><ex>bir <u>vaqıt</u></ex><lg>crh</lg> → <ex>bir <u>süre</u></ex><lg>tur</lg> <gl>(for) some time</gl></li>
@@ -598,7 +627,7 @@
 				</section>
 
 				<section>
-					<h2>Example: structural transfer</h2>
+					<h2>Structural transfer: example</h2>
 					<ul style="margin-bottom: 1em;">
 						<li><ex>barğan soñ</ex><lg>crh</lg> → <ex>gittikten sonra</ex><lg>tur</lg> <gl>after going</gl></li>
 						<li><span class="code" style="font-size: 80% !important">^bar&lt;v&gt;&lt;iv&gt;&lt;gpr_past&gt;$ ^soñ&lt;post&gt;$</span><lg>crh</lg> →<br/><span class="code" style="font-size: 80% !important">^git&lt;v&gt;&lt;iv&gt;&lt;gpr_past&gt;<span class="highlight-cyan"/>&lt;subst&gt;&lt;abl&gt;</span>$ ^sonra&lt;post&gt;$</span><lg>tur</lg></li>
