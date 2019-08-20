@@ -606,22 +606,23 @@
 <center>
 <div class="codeblock" style="width: 88%; float: auto;">
 &lt;rule comment="REGLA: GAn soñ "&gt;<br/>
-&nbsp;&lt;pattern&gt;<br/>
-&nbsp;&nbsp;&lt;pattern-item n="gpr_past"/&gt;<br/>
-&nbsp;&nbsp;&lt;pattern-item n="soñ"/&gt;<br/>
-&nbsp;&lt;/pattern&gt;<br/>
-&nbsp;&lt;action&gt;<br/>
-&nbsp;&nbsp;&lt;call-macro n="f_strip_tags"&gt;&lt;with-param pos="1"/&gt;&lt;/call-macro&gt;<br/>
-&nbsp;&nbsp;&lt;let&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;<br/>
-<span class="highlight-cyan">&nbsp;&nbsp;&nbsp;&lt;concat&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;&lt;lit-tag v="subst.abl"/&gt;&lt;/concat&gt;</span><br/>
-&nbsp;&nbsp;&lt;/let&gt;<br/>
-&nbsp;&nbsp;&lt;out&gt;&lt;chunk name="n" case="caseSecondWord"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;tags&gt;&lt;tag&gt;&lt;lit-tag v="SP"/&gt;&lt;/tag&gt;&lt;/tags&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;lu&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;&lt;/lu&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;b/&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;lu&gt;&lt;clip pos="2" side="tl" part="whole"/&gt;&lt;/lu&gt;<br/>
-&nbsp;&nbsp;&lt;/chunk&gt;&lt;/out&gt;<br/>
-&nbsp;&lt;/action&gt;<br/>
+&nbsp;&nbsp;&lt;pattern&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pattern-item n="gpr_past"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pattern-item n="soñ"/&gt;<br/>
+&nbsp;&nbsp;&lt;/pattern&gt;<br/>
+&nbsp;&nbsp;&lt;action&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;call-macro n="f_strip_tags"&gt;&lt;with-param pos="1"/&gt;&lt;/call-macro&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;let&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;<br/>
+<span class="highlight-cyan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;concat&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;&lt;lit-tag v="subst.abl"/&gt;&lt;/concat&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/let&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;out&gt;&lt;chunk name="n" case="caseSecondWord"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tags&gt;&lt;tag&gt;&lt;lit-tag v="SP"/&gt;&lt;/tag&gt;&lt;/tags&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lu&gt;&lt;clip pos="1" side="tl" part="whole"/&gt;&lt;/lu&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;b/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lu&gt;&lt;clip pos="2" side="tl" part="whole"/&gt;&lt;/lu&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/chunk&gt;&lt;/out&gt;<br/>
+&nbsp;&nbsp;&lt;/action&gt;<br/>
+&lt;/rule&gt;<br/>
 </rule>
 </div></center>
 					<p>Currently 53 rules for <tt>crh-tur</tt> (and 9 for <tt>tur-cur</tt>)</p>
